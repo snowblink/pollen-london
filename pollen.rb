@@ -9,6 +9,7 @@
 
 require 'rubygems'
 require 'open-uri'
+gem 'twitter4r'
 require 'twitter'
 require 'hpricot'
 
@@ -30,5 +31,11 @@ elements.each do |image|
 end
 
 to_twitter.each do |update|
-  twitter.status(:post, update)
+  begin
+    twitter.status(:post, update)
+  rescue Exception => e
+    puts "FAILED!"
+    puts e
+    exit 1
+  end
 end
