@@ -12,8 +12,11 @@ require 'open-uri'
 gem 'twitter4r'
 require 'twitter'
 require 'hpricot'
+require 'yaml'
 
-twitter = Twitter::Client.new(:login => 'pollen_london', :password => 'secrety password')
+twitter_config = YAML::load_file('twitter_config.yml')
+
+twitter = Twitter::Client.new(twitter_config)
 
 # where I live
 PLACE = "London"
