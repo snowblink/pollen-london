@@ -15,8 +15,9 @@ require 'hpricot'
 require 'yaml'
 
 twitter_config = YAML::load_file('twitter_config.yml')
-
 twitter = Twitter::Client.new(twitter_config)
+
+date = DateTime.now.strftime("%Y%m%d%H%M%S")
 
 # where I live
 PLACE = "London"
@@ -30,7 +31,9 @@ to_twitter = []
 
 elements.each do |image|
   alt_text = image.get_attribute("alt")
-  to_twitter << alt_text if alt_text.include?(PLACE)
+  if alt_text.include?(PLACE)
+    to_twitter << "#{alt_text} checked at #{date}"
+  end
 end
 
 to_twitter.each do |update|
