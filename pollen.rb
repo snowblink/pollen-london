@@ -14,7 +14,7 @@ require 'twitter'
 require 'hpricot'
 require 'yaml'
 
-twitter_config = YAML::load_file('twitter_config.yml')
+twitter_config = YAML::load_file(File.dirname(__FILE__) + '/twitter_config.yml')
 twitter = Twitter::Client.new(twitter_config)
 
 date = DateTime.now.strftime("%Y%m%d%H%M%S")
@@ -38,7 +38,8 @@ end
 
 to_twitter.each do |update|
   begin
-    twitter.status(:post, update)
+    # twitter.status(:post, update)
+    puts update
   rescue Exception => e
     puts "FAILED!"
     puts e
