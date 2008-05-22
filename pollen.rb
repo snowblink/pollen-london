@@ -15,8 +15,8 @@ require 'hpricot'
 require 'yaml'
 
 Twitter::Client.configure do |conf|
-  conf.application_name     = 'pollenlondon'
-  conf.application_version  = '0.2'
+  conf.application_name     = 'PollenLondonBot'
+  conf.application_version  = '0.3'
   conf.application_url      = 'https://github.com/snowblink/pollen-london/tree'
   conf.source               = 'pollenlondon'
 end
