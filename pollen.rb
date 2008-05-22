@@ -14,6 +14,13 @@ require 'twitter'
 require 'hpricot'
 require 'yaml'
 
+Twitter::Client.configure do |conf|
+  conf.application_name     = 'pollenlondon'
+  conf.application_version  = '0.2'
+  conf.application_url      = 'https://github.com/snowblink/pollen-london/tree'
+  conf.source               = 'pollenlondon'
+end
+
 twitter_config = YAML::load_file(File.dirname(__FILE__) + '/twitter_config.yml')
 twitter = Twitter::Client.new(twitter_config)
 
