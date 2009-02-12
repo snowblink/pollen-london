@@ -24,7 +24,7 @@ end
 twitter_config = YAML::load_file(File.dirname(__FILE__) + '/twitter_config.yml')
 twitter = Twitter::Client.new(twitter_config)
 
-date = DateTime.now.strftime("%Y%m%d%H%M%S")
+date = DateTime.now.strftime("%A %Y%m%d")
 
 # where I live
 PLACE = "London"
@@ -39,7 +39,9 @@ to_twitter = []
 elements.each do |image|
   alt_text = image.get_attribute("alt")
   if alt_text.include?(PLACE)
-    to_twitter << "#{alt_text} checked at #{date}"
+    alt_text =~ /is (.* risk)/
+    risk = $1
+    to_twitter << "#{risk.capitalize} checked #{date}"
   end
 end
 
