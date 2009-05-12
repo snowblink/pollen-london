@@ -16,7 +16,7 @@ require 'yaml'
 
 Twitter::Client.configure do |conf|
   conf.application_name     = 'PollenLondonBot'
-  conf.application_version  = '0.3'
+  conf.application_version  = '0.4'
   conf.application_url      = 'https://github.com/snowblink/pollen-london/tree'
   conf.source               = 'pollenlondon'
 end
@@ -26,22 +26,15 @@ twitter = Twitter::Client.new(twitter_config)
 
 date = DateTime.now.strftime("%A %Y%m%d")
 
-# where I live
-PLACE = "London"
-
 # load BBC Pollen site
-doc = Hpricot(open("http://www.bbc.co.uk/weather/pollen/"))
+doc = Hpricot(open("http://news.bbc.co.uk/weather/forecast/8/UV.xhtml"))
 
-elements = doc.search("/html/body/table/tbody/tr/td/img")
-
+elements = doc.search("li")
 to_twitter = []
 
-elements.each do |image|
-  alt_text = image.get_attribute("alt")
-  if alt_text.include?(PLACE)
-    alt_text =~ /is (.* risk)/
-    risk = $1
-    to_twitter << "#{risk.capitalize} checked #{date}"
+elements.each do |element|
+  if element.get_attribute("class") == 'pollenval'
+    to_twitter << element.at("img").get_attribute("alt")
   end
 end
 
