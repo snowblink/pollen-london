@@ -34,14 +34,14 @@ to_twitter = []
 
 elements.each do |element|
   if element.get_attribute("class") == 'pollenval'
-    to_twitter << element.at("img").get_attribute("alt")
+    to_twitter << element.at("img").get_attribute("alt") + ' (' + Time.now.strftime("%a %d/%m") + ')'
   end
 end
 
 to_twitter.each do |update|
   begin
-    twitter.status(:post, update)
-    # puts update
+    # twitter.status(:post, update)
+    puts update
   rescue Exception => e
     puts "FAILED!"
     puts e
