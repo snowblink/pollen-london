@@ -34,7 +34,7 @@ to_twitter = []
 
 elements.each do |element|
   if element.get_attribute("class") == 'pollenval'
-    to_twitter << element.at("img").get_attribute("alt") + ' (' + Time.now.strftime("%a %d/%m") + ')'
+    to_twitter << element.at("img").get_attribute("alt") + ' (' + Time.now.gmtime.strftime("%a %d/%m") + ')'
   end
 end
 
