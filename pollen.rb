@@ -15,14 +15,13 @@ require 'hpricot'
 require 'yaml'
 
 Twitter::Client.configure do |conf|
-  conf.application_name     = 'PollenLondonBot'
-  conf.application_version  = '0.5'
-  conf.application_url      = 'https://github.com/snowblink/pollen-london/tree'
-  conf.source               = 'pollenlondon'
+  conf.application_name       = 'PollenLondonBot'
+  conf.application_version    = '0.6'
+  conf.application_url        = 'https://github.com/snowblink/pollen-london/tree'
+  conf.source                 = 'pollenlondon'
 end
 
-twitter_config = YAML::load_file(File.dirname(__FILE__) + '/twitter_config.yml')
-twitter = Twitter::Client.new(twitter_config)
+twitter = Twitter::Client.from_config('twitter.yml', 'production')
 
 date = DateTime.now.strftime("%A %Y%m%d")
 
@@ -64,7 +63,7 @@ else
       # puts update
     rescue Exception => e
       puts "FAILED!"
-      puts e
+      puts e.backtrace
       exit 1
     end
   end
