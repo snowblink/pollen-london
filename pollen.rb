@@ -59,8 +59,8 @@ else
 
   to_twitter.each do |update|
     begin
-      # twitter.status(:post, update)
-      puts update
+      twitter.status(:post, update)
+      # puts update
     rescue Exception => e
       puts "FAILED!"
       puts e.backtrace
