@@ -21,7 +21,7 @@ Twitter::Client.configure do |conf|
   conf.source                 = 'pollenlondon'
 end
 
-twitter = Twitter::Client.from_config('twitter.yml', 'production')
+twitter = Twitter::Client.from_config(File.join(File.dirname(__FILE__), 'twitter.yml'), 'production')
 
 date = DateTime.now.strftime("%A %Y%m%d")
 
@@ -59,8 +59,8 @@ else
 
   to_twitter.each do |update|
     begin
-      twitter.status(:post, update)
-      # puts update
+      # twitter.status(:post, update)
+      puts update
     rescue Exception => e
       puts "FAILED!"
       puts e.backtrace
