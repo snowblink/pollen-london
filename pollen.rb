@@ -53,7 +53,7 @@ else
   
   elements.each do |element|
     if element.get_attribute("class") == 'pollenval'
-      to_twitter << element.at("img").get_attribute("alt") + " #{pollen_type} (" + Time.now.gmtime.strftime("%a %d/%m") + ')'
+      to_twitter << element.at("img").get_attribute("alt") + " #{pollen_type} (" + Time.now.gmtime.strftime("%a %d/%m") + ')' if element.at("img")
     end
   end
 
