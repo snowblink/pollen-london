@@ -49,6 +49,7 @@ end
 
 elements.each do |element|
   if element.get_attribute("class") == 'pollenval'
+    next unless element.at("img")
     low_or_high = element.at("img").get_attribute("alt")
     next if low_or_high =~ /N\/A/
     to_twitter << low_or_high
