@@ -57,10 +57,10 @@ elements.each do |element|
   end
 end
 
-if to_twitter
+unless to_twitter.empty?
   begin
     twitter.status(:post, to_twitter.join(' '))
-    puts to_twitter.join(' ')
+    # puts to_twitter.join(' ')
   rescue Exception => e
     puts "FAILED!"
     puts e.backtrace
