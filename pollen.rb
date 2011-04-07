@@ -35,7 +35,7 @@ to_twitter = []
 # Tree pollen forecasts from the 20th April to 19th May.
 # Grass pollen forecasts from the 20th May to 4th August.
 # Weed pollen forecasts from the 5th to 25th August.
-# Fungal Spore forecasts from the 25th August to 30th November. 
+# Fungal Spore forecasts from the 25th August to 30th November.
 
 pollen_type = if ((Date.civil(Date.today.year, 4, 20))..(Date.civil(Date.today.year, 5, 19))).include?(Date.today)
   "Tree Pollen"
@@ -47,24 +47,23 @@ elsif ((Date.civil(Date.today.year, 8, 25))..(Date.civil(Date.today.year, 11, 30
   "Fungal Spore"
 end
 
-if pollen_type.nil?
-  # Outside of pollen season
-else
-  
-  elements.each do |element|
-    if element.get_attribute("class") == 'pollenval'
-      to_twitter << element.at("img").get_attribute("alt") + " #{pollen_type} (" + Time.now.gmtime.strftime("%a %d/%m") + ')' if element.at("img")
-    end
+elements.each do |element|
+  if element.get_attribute("class") == 'pollenval'
+    low_or_high = element.at("img").get_attribute("alt")
+    next if low_or_high =~ /N\/A/
+    to_twitter << low_or_high
+    to_twitter << pollen_type unless pollen_type.nil?
+    to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
   end
+end
 
-  to_twitter.each do |update|
-    begin
-      twitter.status(:post, update)
-      # puts update
-    rescue Exception => e
-      puts "FAILED!"
-      puts e.backtrace
-      exit 1
-    end
+if to_twitter
+  begin
+    twitter.status(:post, to_twitter.join(' '))
+    puts to_twitter.join(' ')
+  rescue Exception => e
+    puts "FAILED!"
+    puts e.backtrace
+    exit 1
   end
 end
