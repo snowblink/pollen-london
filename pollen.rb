@@ -7,10 +7,12 @@
 
 # $: << File.expand_path(File.dirname(__FILE__) + '/../lib')
 
-require 'rubygems'
+require "rubygems"
+require "bundler/setup"
+
 require 'open-uri'
-gem 'twitter4r'
 require 'twitter'
+
 require 'hpricot'
 require 'yaml'
 
