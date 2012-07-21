@@ -30,6 +30,7 @@ date = DateTime.now.strftime("%A %Y%m%d")
 # load BBC Pollen site
 doc = Hpricot(open("http://www.bbc.co.uk/weather/2643743"))
 
+pollen_value = doc.at("div.pollen-index span.value").inner_html
 
 # 20091103 - Adding type of pollen based on time of year
 # Tree pollen forecasts from the 20th April to 19th May.
@@ -48,11 +49,11 @@ elsif ((Date.civil(Date.today.year, 8, 25))..(Date.civil(Date.today.year, 11, 30
 end
 
 to_twitter = []
-to_twitter << doc.at("div.pollen-index span.value").inner_html
+to_twitter << pollen_value
 to_twitter << pollen_type unless pollen_type.nil?
 to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
 
-unless to_twitter.empty?
+if pollen_value
   begin
     twitter.status(:post, to_twitter.join(' '))
     # puts to_twitter.join(' ')
