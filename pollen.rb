@@ -28,10 +28,8 @@ twitter = Twitter::Client.from_config(File.join(File.dirname(__FILE__), 'twitter
 date = DateTime.now.strftime("%A %Y%m%d")
 
 # load BBC Pollen site
-doc = Hpricot(open("http://news.bbc.co.uk/weather/forecast/8/UV.xhtml"))
+doc = Hpricot(open("http://www.bbc.co.uk/weather/2643743"))
 
-elements = doc.search("li")
-to_twitter = []
 
 # 20091103 - Adding type of pollen based on time of year
 # Tree pollen forecasts from the 20th April to 19th May.
@@ -49,16 +47,10 @@ elsif ((Date.civil(Date.today.year, 8, 25))..(Date.civil(Date.today.year, 11, 30
   "Fungal Spore"
 end
 
-elements.each do |element|
-  if element.get_attribute("class") == 'pollenval'
-    next unless element.at("img")
-    low_or_high = element.at("img").get_attribute("alt")
-    next if low_or_high =~ /N\/A/
-    to_twitter << low_or_high
-    to_twitter << pollen_type unless pollen_type.nil?
-    to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
-  end
-end
+to_twitter = []
+to_twitter << doc.at("div.pollen-index span.value").inner_html
+to_twitter << pollen_type unless pollen_type.nil?
+to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
 
 unless to_twitter.empty?
   begin
