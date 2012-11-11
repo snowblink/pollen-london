@@ -16,14 +16,14 @@ require 'twitter'
 require 'hpricot'
 require 'yaml'
 
-Twitter::Client.configure do |conf|
-  conf.application_name       = 'PollenLondonBot'
-  conf.application_version    = '0.6'
-  conf.application_url        = 'https://github.com/snowblink/pollen-london/tree'
-  conf.source                 = 'pollenlondon'
-end
+Twitter.configure do |config|
+  twitter_config = YAML.load_file('twitter.yml')
 
-twitter = Twitter::Client.from_config(File.join(File.dirname(__FILE__), 'twitter.yml'), 'production')
+  config.consumer_key = twitter_config["oauth_consumer"]["key"]
+  config.consumer_secret = twitter_config["oauth_consumer"]["secret"]
+  config.oauth_token = twitter_config["oauth_access"]["key"]
+  config.oauth_token_secret = twitter_config["oauth_access"]["secret"]
+end
 
 date = DateTime.now.strftime("%A %Y%m%d")
 
@@ -55,7 +55,7 @@ to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
 
 if pollen_value
   begin
-    twitter.status(:post, to_twitter.join(' '))
+    Twitter.update(to_twitter.join(' '))
     # puts to_twitter.join(' ')
   rescue Exception => e
     puts "FAILED!"

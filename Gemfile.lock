@@ -1,16 +1,20 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    faraday (0.8.4)
+      multipart-post (~> 1.1)
     hpricot (0.8.5)
-    json (1.6.6)
-    oauth (0.4.5)
-    twitter4r (0.7.0)
-      json (>= 1.1.1)
-      oauth (>= 0.4.1)
+    multi_json (1.3.7)
+    multipart-post (1.1.5)
+    simple_oauth (0.1.9)
+    twitter (4.2.0)
+      faraday (~> 0.8)
+      multi_json (~> 1.3)
+      simple_oauth (~> 0.1.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   hpricot
-  twitter4r
+  twitter
