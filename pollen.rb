@@ -17,7 +17,7 @@ require 'hpricot'
 require 'yaml'
 
 Twitter.configure do |config|
-  twitter_config = YAML.load_file('twitter.yml')
+  twitter_config = YAML.load_file(File.join(File.dirname(__FILE__), 'twitter.yml'))
 
   config.consumer_key = twitter_config["oauth_consumer"]["key"]
   config.consumer_secret = twitter_config["oauth_consumer"]["secret"]
