@@ -1,7 +1,0 @@
-production:
-  oauth_consumer: 
-    key: CONSUMER KEY
-    secret: CONSUMER SECRET
-  oauth_access:
-    key: ACCESS TOKEN
-    secret: ACCESS TOKEN SECRET

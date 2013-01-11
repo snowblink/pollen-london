@@ -17,12 +17,10 @@ require 'hpricot'
 require 'yaml'
 
 Twitter.configure do |config|
-  twitter_config = YAML.load_file(File.join(File.dirname(__FILE__), 'twitter.yml'))
-
-  config.consumer_key = twitter_config["oauth_consumer"]["key"]
-  config.consumer_secret = twitter_config["oauth_consumer"]["secret"]
-  config.oauth_token = twitter_config["oauth_access"]["key"]
-  config.oauth_token_secret = twitter_config["oauth_access"]["secret"]
+  config.consumer_key       = ENV['CONSUMER_KEY']
+  config.consumer_secret    = ENV['CONSUMER_SECRET']
+  config.oauth_token        = ENV['OAUTH_TOKEN']
+  config.oauth_token_secret = ENV['OAUTH_SECRET']
 end
 
 date = DateTime.now.strftime("%A %Y%m%d")
@@ -30,7 +28,8 @@ date = DateTime.now.strftime("%A %Y%m%d")
 # load BBC Pollen site
 doc = Hpricot(open("http://www.bbc.co.uk/weather/2643743"))
 
-pollen_value = doc.at("div.pollen-index span.value").inner_html
+pollen_span = doc.at("div.pollen-index span.value")
+pollen_value = pollen_span ? pollen_span.inner_html : nil
 
 # 20091103 - Adding type of pollen based on time of year
 # Tree pollen forecasts from the 20th April to 19th May.
