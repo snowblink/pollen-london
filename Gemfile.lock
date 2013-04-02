@@ -3,7 +3,7 @@ GEM
   specs:
     faraday (0.8.4)
       multipart-post (~> 1.1)
-    hpricot (0.8.5)
+    hpricot (0.8.6)
     multi_json (1.3.7)
     multipart-post (1.1.5)
     simple_oauth (0.1.9)
