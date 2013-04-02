@@ -58,6 +58,7 @@ if pollen_value
     # puts to_twitter.join(' ')
   rescue Exception => e
     puts "FAILED!"
+    puts e
     puts e.backtrace
     exit 1
   end
