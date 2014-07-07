@@ -16,7 +16,12 @@ require 'twitter'
 require 'hpricot'
 require 'yaml'
 
-date = DateTime.now.strftime("%A %Y%m%d")
+twitter_client = Twitter::REST::Client.new do |config|
+  config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+  config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+  config.access_token        = ENV["TWITTER_OAUTH_TOKEN"]
+  config.access_token_secret = ENV["TWITTER_OAUTH_TOKEN_SECRET"]
+end
 
 # load BBC Pollen site
 doc = Hpricot(open("http://www.bbc.co.uk/weather/2643743"))
@@ -47,7 +52,7 @@ to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
 
 if pollen_value
   begin
-    Twitter.update(to_twitter.join(' '))
+    twitter_client.update(to_twitter.join(' '))
     # puts to_twitter.join(' ')
   rescue Exception => e
     puts "FAILED!"
