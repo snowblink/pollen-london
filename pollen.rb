@@ -54,8 +54,8 @@ to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
 
 if pollen_value
   begin
-    # twitter_client.update(to_twitter.join(' '))
-    puts to_twitter.join(' ')
+    twitter_client.update(to_twitter.join(' '))
+    # puts to_twitter.join(' ')
   rescue Exception => e
     puts "FAILED!"
     puts e
