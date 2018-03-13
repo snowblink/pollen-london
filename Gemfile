@@ -2,4 +2,4 @@ source "https://rubygems.org"
 ruby "2.5.0"
 
 gem 'twitter'
-gem 'hpricot'
+gem "nokogiri"

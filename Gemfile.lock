@@ -7,7 +7,6 @@ GEM
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     equalizer (0.0.11)
-    hpricot (0.8.6)
     http (3.0.0)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -19,8 +18,11 @@ GEM
     http_parser.rb (0.6.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    mini_portile2 (2.3.0)
     multipart-post (2.0.0)
     naught (1.1.0)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
     public_suffix (3.0.2)
     simple_oauth (0.3.1)
     thread_safe (0.3.6)
@@ -43,7 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  hpricot
+  nokogiri
   twitter
 
 RUBY VERSION
