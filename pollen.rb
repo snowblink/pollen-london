@@ -13,7 +13,7 @@ require "bundler/setup"
 require 'open-uri'
 require 'twitter'
 
-require 'hpricot'
+require 'nokogiri'
 require 'yaml'
 
 twitter_client = Twitter::REST::Client.new do |config|
@@ -23,8 +23,10 @@ twitter_client = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV["TWITTER_OAUTH_TOKEN_SECRET"]
 end
 
+BBC_WEATHER_LINK = "https://www.bbc.co.uk/weather/2643743"
+
 # load BBC Pollen site
-doc = Hpricot(open("http://www.bbc.co.uk/weather/2643743"))
+doc = Nokogiri::HTML(open(BBC_WEATHER_LINK))
 
 pollen_span = doc.at("div.pollen-index span.value")
 pollen_value = pollen_span ? pollen_span.inner_html : nil
@@ -52,8 +54,8 @@ to_twitter << "(" + Time.now.gmtime.strftime("%a %d/%m") + ')'
 
 if pollen_value
   begin
-    twitter_client.update(to_twitter.join(' '))
-    # puts to_twitter.join(' ')
+    # twitter_client.update(to_twitter.join(' '))
+    puts to_twitter.join(' ')
   rescue Exception => e
     puts "FAILED!"
     puts e
