@@ -1,7 +1,5 @@
 # Pollen London
 
-[![Dependency Status](https://gemnasium.com/snowblink/pollen-london.png)](https://gemnasium.com/snowblink/pollen-london)
-
 A simple ruby script which posts pollen levels to Twitter.
 
 The BBC website supplies pollen data, but no RSS.
