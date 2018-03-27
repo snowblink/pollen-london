@@ -28,8 +28,8 @@ BBC_WEATHER_LINK = "https://www.bbc.co.uk/weather/2643743"
 # load BBC Pollen site
 doc = Nokogiri::HTML(open(BBC_WEATHER_LINK))
 
-pollen_span = doc.at("div.pollen-index span.value")
-pollen_value = pollen_span ? pollen_span.inner_html : nil
+json_data = JSON.parse(doc.xpath("//script[@type='application/json']").children.first.inner_text)
+pollen_value = json_data["data"]["forecasts"][0]["summary"]["report"]["pollenIndexText"]
 
 # 20091103 - Adding type of pollen based on time of year
 # Tree pollen forecasts from the 20th April to 19th May.
