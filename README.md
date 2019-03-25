@@ -1,5 +1,8 @@
 # Pollen London
 
+[![Depfu](https://badges.depfu.com/badges/fac26e344acb47c68f757e6c4891714d/overview.svg)](https://depfu.com/github/snowblink/pollen-london?project_id=5036)
+[![Depfu](https://badges.depfu.com/badges/fac26e344acb47c68f757e6c4891714d/count.svg)](https://depfu.com/github/snowblink/pollen-london?project_id=5036)
+
 A simple ruby script which posts pollen levels to Twitter.
 
 The BBC website supplies pollen data, but no RSS.
