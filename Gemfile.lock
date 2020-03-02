@@ -21,7 +21,7 @@ GEM
     mini_portile2 (2.4.0)
     multipart-post (2.0.0)
     naught (1.1.0)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     public_suffix (3.0.2)
     simple_oauth (0.3.1)
