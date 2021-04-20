@@ -3,4 +3,3 @@ twitter.yml
 vendor/bundle
 .DS_Store
 .ruby-gemset
-.ruby-version
