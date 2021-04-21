@@ -26,7 +26,7 @@ end
 BBC_WEATHER_LINK = "https://www.bbc.co.uk/weather/2643743"
 
 # load BBC Pollen site
-doc = Nokogiri::HTML(open(BBC_WEATHER_LINK))
+doc = Nokogiri::HTML(URI.open(BBC_WEATHER_LINK))
 
 json_data = JSON.parse(doc.xpath("//script[@type='application/json']").children.first.inner_text)
 pollen_value = json_data["data"]["forecasts"][0]["summary"]["report"]["pollenIndexText"]
